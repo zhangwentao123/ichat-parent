@@ -280,7 +280,7 @@
 	    <appender-ref ref="STDOUT" />
 	</logger>
 	
-    <logger name="com.mobanker" level="DEBUG" additivity="true">
+    <logger name="com.thebo" level="DEBUG" additivity="true">
         <appender-ref ref="file-info" />
     </logger>
 
@@ -299,7 +299,7 @@
     <logger name="c.m.f.spring.aspect" level="ERROR"/>
 
 
-	<logger name="com.mobanker.lc.api.job" level="DEBUG" additivity="true">
+	<logger name="com.thebo.lc.api.job" level="DEBUG" additivity="true">
         <appender-ref ref="job-log-debug" />
         <appender-ref ref="job-log-error" />
 	</logger>

@@ -14,9 +14,6 @@
     <!-- enable @AspectJ support with XML based configuration -->
     <aop:aspectj-autoproxy />
 
-    <!-- 加载资源文件  其中包含变量信息，必须在Spring配置文件的最前面加载，即第一个加载-->
-    <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
-
     <bean class="com.thebo.framework.spring.property.PropertyPlaceholderConfigurer">
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         <property name="ignoreResourceNotFound" value="true"/>
@@ -24,7 +21,6 @@
         <property name="fileEncoding" value="utf-8"/>
         <property name="locations">
             <list>
-                <value>classpath:jdbc.properties</value>
                 <value>classpath:config/errorcode.properties</value>
             </list>
         </property>
@@ -36,16 +32,17 @@
     <!-- 自动扫描与装配bean -->
     <context:component-scan base-package="com.thebo"/>
 
-    <!-- 数据库映射 -->
-    <!--  class="org.apache.tomcat.dbcp.dbcp.BasicDataSource" -->
-    <!--  class="org.springframework.jdbc.datasource.DriverManagerDataSource" -->
-    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="driverClassName" value="${jdbc.driverClass}" />-->
-        <!--<property name="url" value="${jdbc.url}" />-->
-        <!--<property name="username" value="${jdbc.username}" />-->
-        <!--<property name="password" value="${jdbc.password}" />-->
-    <!--</bean>-->
-
+    <!-- 异步线程池 -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 核心线程数  -->
+        <property name="corePoolSize" value="10" />
+        <!-- 最大线程数 -->
+        <property name="maxPoolSize" value="50" />
+        <!-- 队列最大长度 >=mainExecutor.maxSize -->
+        <property name="queueCapacity" value="1000" />
+        <!-- 线程池维护线程所允许的空闲时间 -->
+        <property name="keepAliveSeconds" value="60" />
+    </bean>
 
     <!-- 引入其他配置文件，可以为多个 -->
     <import resource="classpath*:spring/*.xml"/>

@@ -36,8 +36,7 @@ public class SqlInterceptor implements Interceptor {
 	public static void setRowBounds(RowBounds rowBounds) {
 		SqlInterceptor.rowBounds.set(rowBounds);
 	}
-	
-	@Override
+
 	public Object intercept(Invocation invocation) throws Throwable {
 		StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
 		BoundSql boundSql = statementHandler.getBoundSql();
@@ -78,12 +77,10 @@ public class SqlInterceptor implements Interceptor {
 		return invocation.proceed();
 	}
 
-	@Override
 	public Object plugin(Object target) {
 		return Plugin.wrap(target, this);
 	}
 
-	@Override
 	public void setProperties(Properties properties) {}
 
 }

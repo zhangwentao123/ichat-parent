@@ -32,12 +32,6 @@
         <constructor-arg name="databaseName" value="db_mongo" />
     </bean>
 
-    <!--<bean id="abstractMongoDB" class="com.***.AbstractMongoDB"-->
-          <!--abstract="true">-->
-        <!--<property name="mongoTemplate">-->
-            <!--<ref bean="mongoTemplate" />-->
-        <!--</property>-->
-    <!--</bean>-->
 
 
 </beans>
