@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 public class LoggerAspect {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
+
+    private long start;
+    private long end;
+
     /**
      * Pointcut
      * 定义Pointcut，Pointcut的名称为aspectjMethod()，此方法没有返回值和参数
@@ -42,7 +46,7 @@ public class LoggerAspect {
         Object[] args = joinPoint.getArgs();
         logger.debug("before exec class:{},method:{},args:{}", targetObject, signatureName, args);
         logger.debug("=======>进入方法之前记录日志切面结束");
-
+        start = System.currentTimeMillis();
     }
 
     /**
@@ -59,6 +63,9 @@ public class LoggerAspect {
         String signatureName = signature.getName();
         logger.debug("after exec class:{},method:{}", targetObject, signatureName);
         logger.debug("=======>退出方法记录日志切面结束");
+
+        end = System.currentTimeMillis();
+        logger.debug("=======>执行{}方法共耗时{}ms", signature, end-start);
     }
 
     /**
