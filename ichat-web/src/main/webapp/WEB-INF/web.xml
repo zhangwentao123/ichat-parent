@@ -9,7 +9,7 @@
     <!-- 配置Spring -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:config/spring-core.xml</param-value>
+        <param-value>classpath*:applicationContext.xml</param-value>
     </context-param>
 
     <listener>
@@ -38,7 +38,7 @@
         <!--DispatcherServlet对应的上下文配置，默认为/WEB-INF/$servlet-name$-servlet.xml-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:/config/spring-servlet.xml</param-value>
+            <param-value>classpath*:/spring-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

@@ -27,8 +27,8 @@
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>
-                <value>classpath:errorcode.properties</value>
-                <value>classpath:weixin.properties</value>
+                <value>classpath:config/errorcode.properties</value>
+                <value>classpath:config/weixin.properties</value>
             </list>
         </property>
     </bean>
@@ -38,24 +38,6 @@
 
     <!-- 自动扫描与装配bean -->
     <context:component-scan base-package="com.thebo"/>
-
-    <!--<mongo:mongo host="127.0.0.1" port="27017"/>-->
-
-    <!-- mongo的工厂，通过它来取得mongo实例,dbname为mongodb的数据库名，没有的话会自动创建 -->
-    <!--<mongo:db-factory dbname="student" mongo-ref="mongo" />-->
-
-    <!-- mongodb的主要操作对象，所有对mongodb的增删改查的操作都是通过它完成 -->
-    <!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.framework.MongoTemplate">-->
-        <!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />-->
-    <!--</bean>-->
-
-    <!-- 映射转换器，扫描back-package目录下的文件，根据注释，把它们作为mongodb的一个collection的映射 -->
-    <!--<mongo:mapping-converter base-package="com.thebo.entity" />-->
-
-    <!-- mongodb bean的仓库目录，会自动扫描扩展了MongoRepository接口的接口进行注入 -->
-    <!--<mongo:repositories base-package="com.thebo.dao.impl" />-->
-
-
 
     <!-- 数据库映射 -->
     <!--  class="org.apache.tomcat.dbcp.dbcp.BasicDataSource" -->
@@ -69,6 +51,6 @@
 
 
     <!-- 引入其他配置文件，可以为多个 -->
-    <import resource="classpath*:config/spring/*.xml"/>
+    <import resource="classpath*:spring/*.xml"/>
 
 </beans>
