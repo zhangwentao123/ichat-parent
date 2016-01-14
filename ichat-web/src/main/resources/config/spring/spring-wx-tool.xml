@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:weixin.properties" ignore-unresolvable="true"/>
+
+
+    <bean id="wxMpConfigStorage" class="me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage">
+        <property name="appId" value="${wx.appId}"/>
+        <property name="secret" value="${wx.appSecret}"/>
+        <property name="token" value="${wx.token}"/>
+        <property name="aesKey" value="${wx.encodingAESKey}"/>
+    </bean>
+
+    <bean id="wxMpService" class="me.chanjar.weixin.mp.api.WxMpServiceImpl">
+        <property name="wxMpConfigStorage" ref="wxMpConfigStorage"/>
+    </bean>
+
+    <bean id="wxMpMessageRouter" class="me.chanjar.weixin.mp.api.WxMpMessageRouter">
+        <constructor-arg name="wxMpService" ref="wxMpService"/>
+    </bean>
+
+</beans>
