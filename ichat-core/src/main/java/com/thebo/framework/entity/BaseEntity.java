@@ -5,6 +5,10 @@ import java.util.Date;
 
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * 实体类 - 基类
  * ============================================================================
@@ -17,7 +21,10 @@ public class BaseEntity implements Serializable {
 	public static final String CREATE_DATE_PROPERTY_NAME = "createTime";// "创建日期"属性名称
 	public static final String MODIFY_DATE_PROPERTY_NAME = "updateTime";// "修改日期"属性名称
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected String id;// ID
+
 	protected Date createTime;// 创建日期
 	protected String createUser;// 创建人
 	protected Date updateTime;// 修改日期

@@ -62,11 +62,12 @@
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.thebo.ichat.mapper"/>
         <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->
-        <property name="markerInterface" value="com.thebo.framework.mybatis2.BaseMapper"/>
+        <property name="markerInterface" value="com.thebo.framework.mapper.SuperMapper"/>
         <!-- 通用Mapper通过属性注入进行配置，默认不配置时会注册Mapper<T>接口
         <property name="properties">
             <value>
                 mappers=tk.mybatis.mapper.common.Mapper
+                mappers=com.xxx.xxx.MyMapper,com.xxx.xxx.MyMapper2,com.xxx.xxx.MyMapper3
             </value>
         </property>
         -->
