@@ -2,8 +2,8 @@ package com.thebo.framework.util;
 
 import javax.servlet.http.HttpSession;
 
-import com.thebo.framework.constants.SysConstants;
 import com.thebo.framework.entity.BaseUser;
+import com.thebo.framework.constants.SysConstants;
 
 public class SessionUtils {
 	

@@ -24,7 +24,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/weixin/**"/>
             <mvc:exclude-mapping path="/test"/>
-            <bean class="com.thebo.interceptor.WeChatInterceptor"/>
+            <bean class="com.thebo.ichat.interceptor.WeChatInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

@@ -11,26 +11,69 @@
 
     <context:property-placeholder location="classpath:config/database.properties" ignore-unresolvable="true"/>
 
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="url" value="${jdbc.url}" />
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="maxActive" value="${pool.maxPoolSize}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-        <!-- 超过时间限制是否回收 -->
-        <property name="removeAbandoned" value="true" />
-        <!-- 超时时间；单位为秒。180秒=3分钟 -->
-        <property name="removeAbandonedTimeout" value="${pool.removeAbandonedTimeout}" />
-        <!-- 配置获取连接等待超时的时间 -->
-        <property name="maxWait" value="${pool.maxWait}" />
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-        <property name="timeBetweenEvictionRunsMillis" value="${pool.timeBetweenEvictionRunsMillis}" />
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="minEvictableIdleTimeMillis" value="${pool.minEvictableIdleTimeMillis}" />
-        <property name="validationQuery" value="${pool.validationQuery} " />
-        <property name="testWhileIdle" value="true" />
-        <property name="testOnBorrow" value="false" />
-        <property name="testOnReturn" value="false" />
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <property name="filters" value="stat"/>
+
+        <property name="maxActive" value="20"/>
+        <property name="initialSize" value="1"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="1"/>
+
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations">
+            <array>
+                <value>classpath*:mappers/*.xml</value>
+            </array>
+        </property>
+        <property name="typeAliasesPackage" value="com.isea533.mybatis.model"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                            reasonable=true
+                            supportMethodsArguments=true
+                            params=count=countSql
+                            autoRuntimeDialect=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.thebo.ichat.mapper"/>
+        <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->
+        <property name="markerInterface" value="com.thebo.framework.mybatis2.BaseMapper"/>
+        <!-- 通用Mapper通过属性注入进行配置，默认不配置时会注册Mapper<T>接口
+        <property name="properties">
+            <value>
+                mappers=tk.mybatis.mapper.common.Mapper
+            </value>
+        </property>
+        -->
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
     <!-- 使用JDBC事物 -->
@@ -41,33 +84,20 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="configLocation" value="classpath:/mybatis/mybatis-config.xml" />
-        <!--<property name="mapperLocations" value="classpath:/mybatis/mappers/mysql/**/*.xml"/>-->
-        <property name="mapperLocations">
-            <list>
-                <!-- 表示在mybatis/mappers包或以下所有目录中，以-Mapper.xml结尾所有文件 -->
-                <value>classpath*:/mybatis/mappers/mysql/*.xml</value>
-            </list>
-        </property>
-        <!--<property name="typeAliasesPackage" value="com.thebo.tkj.cw.entity" />-->
-        <property name="typeAliasesSuperType" value="com.thebo.framework.entity.BaseEntity" />
-        <property name="configurationProperties">
-            <props>
-                <prop key="dialect">mysql</prop>
-            </props>
-        </property>
-        <property name="plugins">
-            <list>
-                <bean class="com.thebo.framework.mybatis.SqlInterceptor" />
-            </list>
-        </property>
-    </bean>
+    <aop:aspectj-autoproxy/>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.thebo.dao,com.thebo.framework" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-    </bean>
+    <aop:config>
+        <aop:pointcut id="appService" expression="execution(* com.thebo.ichat.service..*Service*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
+    </aop:config>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="select*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
 
 </beans>
