@@ -40,7 +40,7 @@
                 <value>classpath*:mappers/*.xml</value>
             </array>
         </property>
-        <property name="typeAliasesPackage" value="com.isea533.mybatis.model"/>
+        <property name="typeAliasesPackage" value="com.thebo.ichat.entity"/>
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageHelper">
