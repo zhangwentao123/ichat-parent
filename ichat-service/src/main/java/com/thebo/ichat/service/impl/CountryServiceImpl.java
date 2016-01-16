@@ -1,7 +1,7 @@
 package com.thebo.ichat.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.thebo.framework.service.impl.BaseService;
+import com.thebo.ichat.base.impl.BaseServiceImpl;
 import com.thebo.ichat.entity.Country;
 import com.thebo.ichat.service.CountryService;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2015-09-19 17:17
  */
 @Service
-public class CountryServiceImpl extends BaseService<Country> implements CountryService {
+public class CountryServiceImpl extends BaseServiceImpl<Country> implements CountryService {
 
     public List<Country> selectByCountry(Country country, int page, int rows) {
         Example example = new Example(Country.class);

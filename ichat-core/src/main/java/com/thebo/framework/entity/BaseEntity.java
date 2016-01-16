@@ -22,7 +22,7 @@ public class BaseEntity implements Serializable {
 	public static final String MODIFY_DATE_PROPERTY_NAME = "updateTime";// "修改日期"属性名称
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator = "select uuid()")
 	protected String id;// ID
 
 	protected Date createTime;// 创建日期

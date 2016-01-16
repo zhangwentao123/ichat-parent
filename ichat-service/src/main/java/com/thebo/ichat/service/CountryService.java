@@ -1,11 +1,11 @@
 package com.thebo.ichat.service;
 
-import com.thebo.framework.service.IService;
+import com.thebo.ichat.base.BaseService;
 import com.thebo.ichat.entity.Country;
 
 import java.util.List;
 
-public interface CountryService extends IService<Country> {
+public interface CountryService extends BaseService<Country> {
 
     /**
      * 根据条件分页查询

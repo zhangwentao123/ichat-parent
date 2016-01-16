@@ -2,8 +2,9 @@ package com.thebo.ichat.entity;
 
 import com.thebo.framework.entity.BaseEntity;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "access_log")
 public class AccessLog extends BaseEntity{

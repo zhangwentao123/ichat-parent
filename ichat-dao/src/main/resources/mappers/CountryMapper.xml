@@ -24,7 +24,7 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.isea533.mybatis.mapper.CountryMapper" >
+<mapper namespace="com.thebo.ichat.mapper.CountryMapper" >
   <resultMap id="BaseResultMap" type="com.thebo.ichat.entity.Country" >
     <!--
       WARNING - @mbggenerated

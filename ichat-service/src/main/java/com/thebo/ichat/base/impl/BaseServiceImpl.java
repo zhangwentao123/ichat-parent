@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.thebo.framework.service.impl;
+package com.thebo.ichat.base.impl;
 
-import com.thebo.framework.service.IService;
+import com.thebo.ichat.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * Created by liuzh on 2014/12/11.
  */
-public abstract class BaseService<T> implements IService<T> {
+public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     @Autowired
     protected Mapper<T> mapper;

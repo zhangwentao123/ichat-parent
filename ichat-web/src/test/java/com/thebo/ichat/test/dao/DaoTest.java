@@ -1,7 +1,6 @@
 package com.thebo.ichat.test.dao;
 
 
-import com.thebo.ichat.mapper.TestDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,12 +12,5 @@ import javax.annotation.Resource;
 @ContextConfiguration("classpath:applicationContext.xml")
 public class DaoTest {
 
-    @Resource
-    protected TestDao testDao;
-
-    @Test
-    public void testDao(){
-        testDao.test();
-    }
 
 }

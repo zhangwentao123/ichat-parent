@@ -24,9 +24,10 @@
 
 package com.thebo.ichat.mapper;
 
-import com.thebo.framework.mapper.SuperMapper;
 import com.thebo.ichat.entity.Country;
+import com.thebo.ichat.base.CustomMapper;
 
-public interface CountryMapper extends SuperMapper<Country> {
+
+public interface CountryMapper extends CustomMapper<Country> {
 
 }

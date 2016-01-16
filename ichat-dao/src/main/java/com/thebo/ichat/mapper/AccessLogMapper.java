@@ -1,7 +1,8 @@
 package com.thebo.ichat.mapper;
 
-import com.thebo.ichat.entity.AccessLog;
-import tk.mybatis.mapper.common.Mapper;
 
-public interface AccessLogMapper extends Mapper<AccessLog> {
+import com.thebo.ichat.entity.AccessLog;
+import com.thebo.ichat.base.CustomMapper;
+
+public interface AccessLogMapper extends CustomMapper<AccessLog> {
 }

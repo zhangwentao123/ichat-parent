@@ -1,7 +1,7 @@
 package com.thebo.ichat.mapper;
 
 import com.thebo.ichat.entity.ExpressNum;
-import tk.mybatis.mapper.common.Mapper;
+import com.thebo.ichat.base.CustomMapper;
 
-public interface ExpressNumMapper extends Mapper<ExpressNum> {
+public interface ExpressNumMapper extends CustomMapper<ExpressNum> {
 }

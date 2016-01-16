@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.thebo.framework.service;
+package com.thebo.ichat.base;
 
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ import java.util.List;
  * 通用接口
  */
 @Service
-public interface IService<T> {
+public interface BaseService<T> {
 
     T selectByKey(Object key);
 
