@@ -24,6 +24,7 @@
 
 package com.thebo.ichat.base.impl;
 
+import com.thebo.framework.entity.BaseEntity;
 import com.thebo.ichat.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
@@ -47,6 +48,11 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     public int save(T entity) {
+
+        if (entity instanceof BaseEntity){
+//            ((BaseEntity) entity).setId();
+        }
+
         return mapper.insert(entity);
     }
 

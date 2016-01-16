@@ -72,10 +72,8 @@
             <value>
                 <!--mappers=tk.mybatis.mapper.common.Mapper-->
                 <!--mappers=com.thebo.ichat.mapper.SuperMapper-->
-                <!--&lt;!&ndash; 生成uuid的策略&ndash;&gt;-->
-                <!--&lt;!&ndash;UUID=select uuid()&ndash;&gt;-->
-                <!--&lt;!&ndash;UUID=@java.util.UUID@randomUUID().toString().replace("-", "")&ndash;&gt;-->
-                <!--&lt;!&ndash;ORDER=BEFORE&ndash;&gt;-->
+                UUID=@java.util.UUID@randomUUID().toString().replace("-", "")
+                ORDER=BEFORE
             </value>
         </property>
 

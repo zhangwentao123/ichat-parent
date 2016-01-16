@@ -22,23 +22,22 @@
  * THE SOFTWARE.
  */
 
-package com.thebo.ichat.mapper;
+package com.thebo.ichat.model;
 
-import com.github.pagehelper.PageInfo;
 import com.thebo.ichat.entity.Country;
-import com.thebo.ichat.base.CustomMapper;
-import com.thebo.ichat.model.CountryQueryModel;
+import lombok.Data;
 
+@Data
+public class CountryQueryModel extends QueryModel {
 
-public interface CountryMapper extends CustomMapper<Country> {
+    private Country country;
 
-    /**
-     * 分页查询
-     *
-     * @param queryModel
-     * @return
-     */
-    PageInfo<Country> selectByCountryQueryModel(CountryQueryModel queryModel);
+    public CountryQueryModel() {
+        this(new Country());
+    }
 
+    public CountryQueryModel(Country country) {
+        this.country = country;
+    }
 
 }

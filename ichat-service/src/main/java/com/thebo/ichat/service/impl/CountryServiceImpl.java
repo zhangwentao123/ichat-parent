@@ -1,8 +1,11 @@
 package com.thebo.ichat.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.thebo.ichat.base.impl.BaseServiceImpl;
 import com.thebo.ichat.entity.Country;
+import com.thebo.ichat.mapper.CountryMapper;
+import com.thebo.ichat.model.CountryQueryModel;
 import com.thebo.ichat.service.CountryService;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -32,6 +35,10 @@ public class CountryServiceImpl extends BaseServiceImpl<Country> implements Coun
         //分页查询
         PageHelper.startPage(page, rows);
         return selectByExample(example);
+    }
+
+    public PageInfo<Country> selectByCountryQueryModel(CountryQueryModel queryModel) {
+        return ((CountryMapper) getMapper()).selectByCountryQueryModel(queryModel);
     }
 
 }
