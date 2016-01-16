@@ -6,7 +6,6 @@ import java.util.Date;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -22,7 +21,7 @@ public class BaseEntity implements Serializable {
 	public static final String MODIFY_DATE_PROPERTY_NAME = "updateTime";// "修改日期"属性名称
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator = "select uuid()")
+	@GeneratedValue(generator = "UUID")
 	protected String id;// ID
 
 	protected Date createTime;// 创建日期

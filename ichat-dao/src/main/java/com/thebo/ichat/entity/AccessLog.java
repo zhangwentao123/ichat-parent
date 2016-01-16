@@ -1,11 +1,15 @@
 package com.thebo.ichat.entity;
 
 import com.thebo.framework.entity.BaseEntity;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper=false)
+@ToString(callSuper=true)
 @Table(name = "access_log")
 public class AccessLog extends BaseEntity{
     /**

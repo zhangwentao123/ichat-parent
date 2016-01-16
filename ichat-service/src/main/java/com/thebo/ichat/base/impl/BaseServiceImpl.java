@@ -24,11 +24,15 @@
 
 package com.thebo.ichat.base.impl;
 
+import com.thebo.framework.dto.LoginUserDto;
 import com.thebo.framework.entity.BaseEntity;
+import com.thebo.framework.util.SessionUtils;
 import com.thebo.ichat.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,10 +54,25 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     public int save(T entity) {
 
         if (entity instanceof BaseEntity){
-//            ((BaseEntity) entity).setId();
+            // 设置默认值
+            Date now = Calendar.getInstance().getTime();
+
+            BaseEntity baseEntity = (BaseEntity)entity;
+            //id 会由 mapper3自动生成UUID
+            //	@GeneratedValue(generator = "UUID")
+            if(baseEntity.getCreateTime()==null){
+                baseEntity.setCreateTime(now);
+                baseEntity.setUpdateTime(now);
+            }
+            LoginUserDto user = SessionUtils.getUser();
+
+            if (user != null){
+                baseEntity.setCreateUser(user.getUserName());
+                baseEntity.setUpdateUser(user.getUserName());
+            }
         }
 
-        return mapper.insert(entity);
+        return mapper.insertSelective(entity);
     }
 
     public int delete(Object key) {
