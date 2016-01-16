@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * Created by hebo on 2016-1-14.
  */
@@ -28,7 +30,6 @@ public class LoggerAspect {
     private void doLogger() {
     }
 
-    ;
 
 
     /**

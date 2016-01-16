@@ -45,6 +45,8 @@
     </bean>
 
     <!-- 引入其他配置文件，可以为多个 -->
-    <import resource="classpath*:spring/*.xml"/>
+    <import resource="classpath:spring/wechat-tool.xml"/>
+    <!--<import resource="classpath:spring/mongodb.xml"/>-->
+    <import resource="classpath:spring/mybatis.xml"/>
 
 </beans>

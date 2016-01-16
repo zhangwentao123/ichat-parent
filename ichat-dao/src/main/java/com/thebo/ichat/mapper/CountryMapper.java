@@ -26,7 +26,6 @@ package com.thebo.ichat.mapper;
 
 import com.thebo.framework.mapper.SuperMapper;
 import com.thebo.ichat.entity.Country;
-import tk.mybatis.mapper.common.Mapper;
 
 public interface CountryMapper extends SuperMapper<Country> {
 

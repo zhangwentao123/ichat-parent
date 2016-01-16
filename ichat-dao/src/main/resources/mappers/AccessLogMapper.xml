@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thebo.ichat.mapper.AccessLogMapper" >
+  <resultMap id="BaseResultMap" type="com.thebo.ichat.entity.AccessLog" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result column="signature" property="signature" jdbcType="VARCHAR" />
+    <result column="request_time" property="requestTime" jdbcType="TIMESTAMP" />
+    <result column="time" property="time" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>
