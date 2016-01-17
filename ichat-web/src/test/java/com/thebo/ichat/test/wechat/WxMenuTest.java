@@ -1,6 +1,5 @@
 package com.thebo.ichat.test.wechat;
 
-import com.thebo.ichat.service.TestService;
 import me.chanjar.weixin.common.bean.WxMenu;
 import me.chanjar.weixin.common.bean.WxMenu.WxMenuButton;
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -22,8 +21,6 @@ public class WxMenuTest {
     @Resource
     protected WxMpService wxMpService;
 
-    @Resource
-    protected TestService testService;
 
     @Test
     public void testMenuCrete() throws WxErrorException {
@@ -92,9 +89,5 @@ public class WxMenuTest {
         wxMpService.menuCreate(menu);
     }
 
-    @Test
-    public void testBean() {
-        testService.test();
-    }
 
 }

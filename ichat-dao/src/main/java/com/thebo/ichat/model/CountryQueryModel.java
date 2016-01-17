@@ -27,7 +27,6 @@ package com.thebo.ichat.model;
 import com.thebo.ichat.entity.Country;
 import lombok.Data;
 
-@Data
 public class CountryQueryModel extends QueryModel {
 
     private Country country;
@@ -40,4 +39,11 @@ public class CountryQueryModel extends QueryModel {
         this.country = country;
     }
 
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 }

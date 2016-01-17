@@ -91,5 +91,13 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         return mapper.selectByExample(example);
     }
 
+    public List<T> select(T entity) {
+        return mapper.select(entity);
+    }
+
+    public int selectCount(T entity) {
+        return mapper.selectCount(entity);
+    }
+
     //TODO 其他...
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.thebo.framework.constants.SysConstants;
 import com.thebo.framework.util.SessionUtils;
 
-@Controller
+//@Controller
 @RequestMapping("/{moduleName}/{submoduleName}")
 public class BaseController {
 	

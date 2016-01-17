@@ -20,7 +20,7 @@ public class CustomRuntimeException extends RuntimeException {
     protected static PropertyPlaceholderConfigurer configurer;
 
 //    static {
-//        _cr = new ConfigReader("/errorcode.properties");
+//        _cr = new ConfigReader("/errCode.properties");
 //    }
 
     private String errorCode;

@@ -21,7 +21,7 @@
         <property name="fileEncoding" value="utf-8"/>
         <property name="locations">
             <list>
-                <value>classpath:config/errorcode.properties</value>
+                <value>classpath:config/errCode.properties</value>
             </list>
         </property>
     </bean>

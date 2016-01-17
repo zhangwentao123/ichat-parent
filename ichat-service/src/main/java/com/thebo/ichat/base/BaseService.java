@@ -34,6 +34,8 @@ import java.util.List;
 @Service
 public interface BaseService<T> {
 
+    List<T> select(T entity);
+
     T selectByKey(Object key);
 
     int save(T entity);
@@ -45,6 +47,8 @@ public interface BaseService<T> {
     int updateNotNull(T entity);
 
     List<T> selectByExample(Object example);
+
+    int selectCount(T entity);
 
     //TODO 其他...
 }

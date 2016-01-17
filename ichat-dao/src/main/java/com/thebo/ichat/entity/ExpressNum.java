@@ -2,88 +2,76 @@ package com.thebo.ichat.entity;
 
 import com.thebo.framework.entity.BaseEntity;
 
-import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "express_num")
 public class ExpressNum extends BaseEntity{
+    /**
+     * 快递单号
+     */
     private String no;
 
-    private Boolean usable;
-
+    /**
+     * 快递公司
+     */
     private String company;
 
-    private Date createtime;
-
-    private Date updatetime;
+    /**
+     * 是否可用
+     */
+    private Integer status;
 
     /**
-     * @return no
+     * 获取快递单号
+     *
+     * @return no - 快递单号
      */
     public String getNo() {
         return no;
     }
 
     /**
-     * @param no
+     * 设置快递单号
+     *
+     * @param no 快递单号
      */
     public void setNo(String no) {
         this.no = no == null ? null : no.trim();
     }
 
     /**
-     * @return usable
-     */
-    public Boolean getUsable() {
-        return usable;
-    }
-
-    /**
-     * @param usable
-     */
-    public void setUsable(Boolean usable) {
-        this.usable = usable;
-    }
-
-    /**
-     * @return company
+     * 获取快递公司
+     *
+     * @return company - 快递公司
      */
     public String getCompany() {
         return company;
     }
 
     /**
-     * @param company
+     * 设置快递公司
+     *
+     * @param company 快递公司
      */
     public void setCompany(String company) {
         this.company = company == null ? null : company.trim();
     }
 
     /**
-     * @return createtime
+     * 获取是否可用
+     *
+     * @return status - 是否可用
      */
-    public Date getCreatetime() {
-        return createtime;
+    public Integer getStatus() {
+        return status;
     }
 
     /**
-     * @param createtime
+     * 设置是否可用
+     *
+     * @param status 是否可用
      */
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
-
-    /**
-     * @return updatetime
-     */
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    /**
-     * @param updatetime
-     */
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

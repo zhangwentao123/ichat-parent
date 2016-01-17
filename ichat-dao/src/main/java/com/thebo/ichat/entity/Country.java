@@ -24,12 +24,14 @@
 
 package com.thebo.ichat.entity;
 
+import com.thebo.framework.entity.BaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Country {
+public class Country{
     /**
      * 主键
      */
