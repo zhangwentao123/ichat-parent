@@ -26,6 +26,18 @@
         </property>
     </bean>
 
+    <bean class="com.thebo.framework.spring.property.ConstantsPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="fileEncoding" value="utf-8"/>
+        <property name="locations">
+            <list>
+                <value>classpath:config/constant.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <!--激活注解-->
     <context:annotation-config/>
 
