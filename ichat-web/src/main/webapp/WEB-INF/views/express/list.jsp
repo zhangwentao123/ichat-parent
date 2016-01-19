@@ -9,6 +9,20 @@
     <jsp:include page="../common/headHtml.jsp"/>
     <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
     <script>
+        function refreshData(){
+            $.getJSON("/wechat/express/count", null, function(json){
+                if(json.length > 0) {
+                    $("#count").html(json["count"]);
+                } else {
+                    $("#count").html("Null");
+                }
+            })
+        }
+
+        $(function(){
+            refreshData();
+            setInterval(refreshData, 5000);
+        });
         $(document).ready(function(){
             $("#count").html(12);
             $.ajax({
