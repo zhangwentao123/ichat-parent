@@ -61,4 +61,11 @@
     <!--<import resource="classpath:spring/mongodb.xml"/>-->
     <import resource="classpath:spring/mybatis.xml"/>
 
+    <bean id="redisUtil" class="com.thebo.framework.cache.RedisUtil">
+        <constructor-arg name="host" value="10.211.55.16" />
+        <constructor-arg name="port" value="6379" />
+        <constructor-arg name="timeout" value="3000" />
+        <constructor-arg name="password" value="hubble" />
+    </bean>
+
 </beans>

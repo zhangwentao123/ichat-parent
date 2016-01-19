@@ -18,14 +18,15 @@
         <tag-class>com.thebo.framework.tags.MessageTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>key</name>
+            <name>nameSpace</name>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <name>nameSpace</name>
+            <name>key</name>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
-
     </tag>
 
 </taglib>

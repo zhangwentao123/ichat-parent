@@ -1,5 +1,6 @@
 package com.thebo.ichat.service.impl;
 
+import com.thebo.framework.cache.RedisUtil;
 import com.thebo.ichat.base.impl.BaseServiceImpl;
 import com.thebo.ichat.entity.ExpressNum;
 import com.thebo.ichat.service.ExpressNumService;
@@ -7,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by HB on 15/11/8.
@@ -33,6 +37,10 @@ public class ExpressNumServiceImpl extends BaseServiceImpl<ExpressNum> implement
             tmp++;
             count--;
         } while (count > 0);
+
+        int expressCount = selectCount(null);
+        
+        redisUtil.set("express_count", expressCount+"");
     }
 
 }

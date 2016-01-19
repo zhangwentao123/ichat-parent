@@ -2,6 +2,7 @@ package com.thebo.ichat.web;
 
 
 import com.alibaba.fastjson.JSON;
+import com.thebo.framework.web.BaseCtrl;
 import com.thebo.ichat.entity.ExpressNum;
 import com.thebo.ichat.service.ExpressNumService;
 import org.slf4j.Logger;
@@ -23,13 +24,17 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/express")
-public class ExpressCtroller {
+public class ExpressCtroller extends BaseCtrl{
 
     private static Logger log = LoggerFactory.getLogger(ExpressCtroller.class);
 
+    @RequestMapping("/index")
+    public String index( Model model) {
+        return "index";
+    }
+
     @Resource
     private ExpressNumService expressNumService;
-
 
     @RequestMapping("addPre")
     public String addPre() {
@@ -62,8 +67,15 @@ public class ExpressCtroller {
     @RequestMapping(value="/count")
     @ResponseBody
     public Object count(){
+//        ResponseEntity response = new ResponseEntity();
         Map map = new HashMap();
-        int count = expressNumService.selectCount(null);
+        Object count = null;
+        if (redisUtil.exists("express_count")){
+            count = redisUtil.get("express_count");
+        } else {
+            count = expressNumService.selectCount(null);
+            redisUtil.set("express_count", count+"");
+        }
         map.put("count", count);
         return JSON.toJSON(map);
     }

@@ -24,6 +24,7 @@
 
 package com.thebo.ichat.base.impl;
 
+import com.thebo.framework.cache.RedisUtil;
 import com.thebo.framework.dto.LoginUserDto;
 import com.thebo.framework.entity.BaseEntity;
 import com.thebo.framework.util.SessionUtils;
@@ -31,6 +32,7 @@ import com.thebo.ichat.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 
+import javax.annotation.Resource;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +44,12 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     @Autowired
     protected Mapper<T> mapper;
+
+    /**
+     * 缓存实例
+     */
+    @Resource
+    protected RedisUtil redisUtil;
 
     public Mapper<T> getMapper() {
         return mapper;

@@ -10,27 +10,12 @@
     <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
     <script>
         function refreshData(){
-            $.getJSON("/wechat/express/count", null, function(json){
-                if(json.length > 0) {
-                    $("#count").html(json["count"]);
-                } else {
-                    $("#count").html("Null");
-                }
-            })
-        }
-
-        $(function(){
-            refreshData();
-            setInterval(refreshData, 5000);
-        });
-        $(document).ready(function(){
-            $("#count").html(12);
             $.ajax({
                 type: "POST",
                 url: "/wechat/express/count",
                 dataType: "json",
                 data: {
-                  name: "",
+                    name: "",
                     sex: ""
                 },
                 success: function(data){
@@ -40,7 +25,31 @@
                     $("#count").html("error:" + jqXHR.status);
                 }
             });
+        }
+
+        $(function(){
+            refreshData();
+           setInterval(refreshData, 5000);
         });
+
+//        $(document).ready(function(){
+//            $("#count").html(12);
+//            $.ajax({
+//                type: "POST",
+//                url: "/wechat/express/count",
+//                dataType: "json",
+//                data: {
+//                  name: "",
+//                    sex: ""
+//                },
+//                success: function(data){
+//                    $("#count").html(data["count"]);
+//                },
+//                error: function(jqXHR){
+//                    $("#count").html("error:" + jqXHR.status);
+//                }
+//            });
+//        });
     </script>
 </head>
 <body>
@@ -83,7 +92,16 @@
                                 <td>${status.index + 1 }</td>
                                 <td><a href="/express/json/${row.no}">${row.no}</a></td>
                                 <td>${row.company}</td>
-                                <td>${row.status}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${row.status == '0'}">
+                                            不可用
+                                        </c:when>
+                                        <c:otherwise>
+                                            可用
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
