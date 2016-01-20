@@ -16,7 +16,7 @@ import java.util.List;
  * @author liuzh_3nofxnp
  * @since 2015-09-19 17:15
  */
-@Controller
+//@Controller
 public class CountryController {
 
     @Resource

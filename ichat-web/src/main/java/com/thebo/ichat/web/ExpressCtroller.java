@@ -28,11 +28,6 @@ public class ExpressCtroller extends BaseCtrl{
 
     private static Logger log = LoggerFactory.getLogger(ExpressCtroller.class);
 
-    @RequestMapping("/index")
-    public String index( Model model) {
-        return "index";
-    }
-
     @Resource
     private ExpressNumService expressNumService;
 

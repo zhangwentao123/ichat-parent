@@ -1,13 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>IMF</title>
-    <jsp:include page="../common/headHtml.jsp"/>
-    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
     <script>
         function refreshData(){
             $.ajax({
@@ -51,8 +44,6 @@
 //            });
 //        });
     </script>
-</head>
-<body>
 <section class="content-header">
     <h1>
         Data Tables
@@ -117,8 +108,9 @@
 </section>
 <!-- /.content -->
 
-
-<jsp:include page="../common/plugins.jsp"/>
+<!-- DataTables -->
+<script src="<%=request.getContextPath()%>/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {
@@ -134,5 +126,3 @@
     });
 </script>
 
-</body>
-</html>
