@@ -1,6 +1,6 @@
 package com.thebo.ichat.service.impl;
 
-import com.thebo.framework.cache.RedisUtil;
+import com.alibaba.fastjson.JSON;
 import com.thebo.ichat.base.impl.BaseServiceImpl;
 import com.thebo.ichat.entity.ExpressNum;
 import com.thebo.ichat.service.ExpressNumService;
@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -37,10 +36,31 @@ public class ExpressNumServiceImpl extends BaseServiceImpl<ExpressNum> implement
             tmp++;
             count--;
         } while (count > 0);
+        expressNum = new ExpressNum();
+        expressNum.setStatus(1);
+        List<ExpressNum> expressNums = select(expressNum);
+        for (ExpressNum num : expressNums) {
+            redisUtil.sadd("usable_express_num", JSON.toJSONString(num));
+        }
+    }
 
-        int expressCount = selectCount(null);
-        
-        redisUtil.set("express_count", expressCount+"");
+    /**
+     * 统计快递单数量
+     * @param usable 是否可用
+     * @return
+     */
+    public long selectCount(boolean usable) {
+        if (usable) {
+            long count = redisUtil.scard("usable_express_num");
+            if (count == 0){
+                ExpressNum expressNum = new ExpressNum();
+                expressNum.setStatus(1);
+                count = selectCount(expressNum);
+            }
+            return count;
+        } else {
+            return selectCount(null);
+        }
     }
 
 }

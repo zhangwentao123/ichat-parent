@@ -6,7 +6,7 @@
        http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:config/wechat.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:config/${profiles.active}/wechat.properties" ignore-unresolvable="true"/>
 
 
     <bean id="wxMpConfigStorage" class="me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage">

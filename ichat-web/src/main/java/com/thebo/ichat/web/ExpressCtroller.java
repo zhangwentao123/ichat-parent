@@ -2,7 +2,9 @@ package com.thebo.ichat.web;
 
 
 import com.alibaba.fastjson.JSON;
-import com.thebo.framework.web.BaseCtrl;
+import com.thebo.framework.cache.RedisUtil;
+import com.thebo.framework.constants.Constants;
+import com.thebo.framework.dto.ResponseEntity;
 import com.thebo.ichat.entity.ExpressNum;
 import com.thebo.ichat.service.ExpressNumService;
 import org.slf4j.Logger;
@@ -24,7 +26,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/express")
-public class ExpressCtroller extends BaseCtrl{
+public class ExpressCtroller{
 
     private static Logger log = LoggerFactory.getLogger(ExpressCtroller.class);
 
@@ -51,27 +53,24 @@ public class ExpressCtroller extends BaseCtrl{
         return "express/list";
     }
 
-    @RequestMapping(value="/json/{no}")
     @ResponseBody
+    @RequestMapping(value="/json/{no}")
     public Object getJson(@PathVariable("no") String no){
         ExpressNum expressNum = new ExpressNum();
         expressNum.setNo(no);
         return expressNumService.select(expressNum);
     }
 
-    @RequestMapping(value="/count")
+    /**
+     * 查询可用的快递单号数量
+     * @return
+     */
     @ResponseBody
-    public Object count(){
-//        ResponseEntity response = new ResponseEntity();
-        Map map = new HashMap();
-        Object count = null;
-        if (redisUtil.exists("express_count")){
-            count = redisUtil.get("express_count");
-        } else {
-            count = expressNumService.selectCount(null);
-            redisUtil.set("express_count", count+"");
-        }
-        map.put("count", count);
-        return JSON.toJSON(map);
+    @RequestMapping(value="/count")
+    public ResponseEntity count(){
+        ResponseEntity responseEntity = new ResponseEntity();
+        long count = expressNumService.selectCount(true);
+        responseEntity.setData(count).setStatus(Constants.System.OK);
+        return responseEntity;
     }
 }

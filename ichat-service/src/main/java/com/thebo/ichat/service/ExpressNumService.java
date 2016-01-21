@@ -11,4 +11,6 @@ public interface ExpressNumService extends BaseService<ExpressNum> {
 
     void add(String startNo, int count, String company);
 
+    long selectCount(boolean usable);
+
 }
