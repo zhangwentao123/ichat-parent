@@ -16,7 +16,6 @@ public class TulingApiTest {
 //        FileUtils
 
 //        File root = new File("D:/Git/ichat-parent/ichat-web/src/main/resources");
-        ZipUtil.zip("D:/Git/ichat-parent/ichat-web/src/main/resources");
 
     }
 }
