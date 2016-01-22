@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * 线程间通信--------------等待与通知机制
  *  1.使用wait()、notify()和notifyAll()时需要先对调用对象加锁
  *  2.调用wait()方法后，线程状态由RUNNING变为WAITING，并将当前线程放置到对象的等待队列
  *  3.notify()或notifyAll()方法调用后，等待线程依旧不会从wait()返回，需要调用notify()或notifyAll()的线程释放锁之后，
@@ -29,6 +30,7 @@ public class WaitNotify {
 
         public void run() {
             synchronized (lock) {
+                //条件不满足时，继续wait，同时释放lock的锁
                 while (flag) {
                     try {
                         System.out.println(Thread.currentThread() + " flag is true. wait @ " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
@@ -38,6 +40,7 @@ public class WaitNotify {
                         e.printStackTrace();
                     }
                 }
+                //条件满足时完成工作
                 System.out.println(Thread.currentThread() + " flag is false. running @ " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
             }
         }
